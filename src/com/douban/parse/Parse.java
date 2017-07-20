@@ -58,14 +58,29 @@ public class Parse {
 				System.out.println(fh);
 				System.out.println(info);
 			}
-			
+			String imgs="";
+			String video="";
 			
 			elements = doc.getElementsByClass("related-pic-bd");
 			for (Element e : elements) {
+				Elements href = e.getElementsByAttribute("href");
+				int i=0;
+				for(Element h:href){
+					String text = h.toString();
+					if(i==0){
+						i++;
+						video = "http://movie.douban.com/trailer/video_url?tid="+text.substring(68,74);
+
+					}else{
+
+						imgs += "https://img3.doubanio.com/view/photo/photo/public/p"+ text.substring(47,57)+".jpg ";
+					}
+					
+				}
 				
-				System.out.println(e.toString());
 			}
-			
+			System.out.println(video);
+			System.out.println(imgs);
 			
 			
 		}

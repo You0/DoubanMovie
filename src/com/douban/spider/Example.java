@@ -2,6 +2,7 @@ package com.douban.spider;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.text.ParseException;
 
 import com.douban.save.Save2DB;
 import com.me.http.MapperCallBack;
@@ -41,7 +42,13 @@ public class Example {
 		// callback预留的接口，在这里自己编写解析数据的过程
 		callBack.setParseListener(new Parse<Movie>() {
 			public Movie parse(String url, String body) {
-				return com.douban.parse.Parse.parse(url, body);
+				Movie movie = null;
+				try {
+					movie = com.douban.parse.Parse.parse(url, body);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				return movie;
 			}
 		});
 
@@ -53,7 +60,6 @@ public class Example {
 				try {
 					Save2DB.save(url,entity);
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

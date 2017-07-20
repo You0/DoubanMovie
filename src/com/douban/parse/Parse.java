@@ -14,14 +14,14 @@ import com.douban.spider.Movie;
 
 public class Parse {
 	public static Movie parse(String url, String body) throws ParseException {
-		Movie movie = new Movie();
+		
 		
 		// 如果是电影的页面则对他进行爬取
 		if (url.contains("subject")) {
 			System.out.println("解析");
+			Movie movie = new Movie();
 			
-			
-			
+			//System.out.println(body);
 			
 			Document doc = Jsoup.parse(body);
 			
@@ -86,15 +86,15 @@ public class Parse {
 				info = info.substring(8,11);
 				Float rating = Float.valueOf(info);
 				
-				System.out.println(direct);
-				System.out.println(bz);
-				System.out.println(actor);
-				System.out.println(type);
-				System.out.println(company);
-				System.out.println(c_date);
-				System.out.println(time);
-				System.out.println(fh);
-				System.out.println(rating);
+//				System.out.println(direct);
+//				System.out.println(bz);
+//				System.out.println(actor);
+//				System.out.println(type);
+//				System.out.println(company);
+//				System.out.println(c_date);
+//				System.out.println(time);
+//				System.out.println(fh);
+//				System.out.println(rating);
 				
 				
 				movie.setActor(actor);
@@ -136,16 +136,25 @@ public class Parse {
 				}
 				
 			}
-			System.out.println(video);
-			System.out.println(imgs);
+			
+			movie.setVideo(video);
+			movie.setImgs(imgs);
+			
+//			System.out.println(video);
+//			System.out.println(imgs);
 			
 			//v:itemreviewed
+			String title1="";
+			Elements titile = doc.getElementsByAttributeValue("property","v:itemreviewed");
+			for(Element e:titile){
+				title1 = e.text();
+			}
+			movie.setTitle(title1);
 			
-			
-			
-			
+			return movie;
 		}
-		return movie;
+		return null;
+		
 	}
 	
 	

@@ -5,7 +5,7 @@ import java.util.Date;
 public class Movie {
 	private String title = "";
 	private String type = "";
-	private int rating = 0;
+	private float rating = 0;
 	private String actor = "";
 	private String cover = "";
 	private String imgs = "";
@@ -84,11 +84,11 @@ public class Movie {
 		this.type = type;
 	}
 
-	public int getRating() {
+	public float getRating() {
 		return rating;
 	}
 
-	public void setRating(int rating) {
+	public void setRating(float rating) {
 		this.rating = rating;
 	}
 

@@ -1,5 +1,8 @@
 package com.douban.parse;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import javax.swing.text.TextAction;
 
 import org.jsoup.Jsoup;
@@ -10,12 +13,35 @@ import org.jsoup.select.Elements;
 import com.douban.spider.Movie;
 
 public class Parse {
-	public static Movie parse(String url, String body) {
+	public static Movie parse(String url, String body) throws ParseException {
+		Movie movie = new Movie();
+		
 		// 如果是电影的页面则对他进行爬取
 		if (url.contains("subject")) {
 			System.out.println("解析");
+			
+			
+			
+			
 			Document doc = Jsoup.parse(body);
+			
 			Elements elements = doc.getElementsByClass("subjectwrap");
+			
+			Elements bg = doc.getElementsByClass("nbgnbg");
+			
+			String cover = "";
+			for(Element b:bg){
+				//System.out.println(b.toString());
+				 Elements imgs=b.getElementsByTag("img");
+			        for(Element element : imgs) {
+			            String imgSrc=element.attr("src");
+			            cover = imgSrc;
+			        }
+				
+			}
+			
+			
+			
 			for (Element e : elements) {
 				//System.out.println(e.text());
 				String info = e.text();
@@ -69,6 +95,25 @@ public class Parse {
 				System.out.println(time);
 				System.out.println(fh);
 				System.out.println(rating);
+				
+				
+				movie.setActor(actor);
+				movie.setCompany(company);
+				movie.setCover(cover);
+				SimpleDateFormat simpleDateFormat;
+				if(c_date.length()==10){
+					simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+				}else{
+					simpleDateFormat = new SimpleDateFormat("yyyy-MM");
+				}
+				movie.setDate(simpleDateFormat.parse(c_date));
+				movie.setDirector(direct);
+				movie.setFh(fh);
+				movie.setTime(time);
+				movie.setRating(rating);
+				movie.setType(type);
+				
+				
 			}
 			String imgs="";
 			String video="";
@@ -93,6 +138,9 @@ public class Parse {
 			}
 			System.out.println(video);
 			System.out.println(imgs);
+			
+			
+			
 			
 			
 		}

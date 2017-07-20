@@ -46,7 +46,19 @@ public class Parse {
 				String fh = info.substring(8, index);
 				info = info.substring(index);
 				
+				direct = split(direct);
+				bz = split(bz);
+				actor = split(actor);
+				type = split(type);
+				company = split(company);
 				
+				index = c_date.indexOf("(");
+				
+				c_date = c_date.substring(0,index);
+				time = split(time);
+				fh = split(fh);
+				info = info.substring(8,11);
+				Float rating = Float.valueOf(info);
 				
 				System.out.println(direct);
 				System.out.println(bz);
@@ -56,7 +68,7 @@ public class Parse {
 				System.out.println(c_date);
 				System.out.println(time);
 				System.out.println(fh);
-				System.out.println(info);
+				System.out.println(rating);
 			}
 			String imgs="";
 			String video="";
@@ -86,4 +98,18 @@ public class Parse {
 		}
 		return null;
 	}
+	
+	
+	
+	private static String split(String str){
+		String[] strings = str.split("/");
+		String strs="";
+		for(int i=0;i<strings.length;i++){
+			strs += strings[i].substring(0,strings[i].length()-1);
+		}
+		return strs;
+	}
+	
+	
+	
 }

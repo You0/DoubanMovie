@@ -30,7 +30,7 @@ public class Example {
 
 		// 这里传入正则，比如我要只想要爬取煎蛋网则可以这样写：
 		crawl.setMatchRegex("https://movie.douban.com/.*");
-		
+		crawl.setBlackReg(new String[]{"ticket"});
 		// 这里传入起始url，将这些url当做起始点，BFS广度搜索进行发散爬取
 		crawl.setStartUrls(new String[] { "https://movie.douban.com/" });
 

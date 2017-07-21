@@ -8,7 +8,7 @@ import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 
 public class Save2DB {
-	final static String uri = "jdbc:mysql://localhost:3306/new_douban";	
+	final static String uri = "jdbc:mysql://115.159.159.65:3306/new_douban";	
 	static Connection connection;
 	public static void save(String url, Movie entity) throws SQLException {
 		if(connection == null ||connection.isClosed()){
